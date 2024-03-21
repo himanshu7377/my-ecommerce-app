@@ -5,9 +5,8 @@ const prisma = new PrismaClient();
 async function seedCategories() {
   try {
     const categories = [
-      // { name: 'Fashion Apparel' },
-      // { name: 'Home Decor2' },
-      // { name: 'Outdoor Gear' },
+      { name: 'Appliances' },
+      { name: 'Outdoor Gear' },
       { name: 'Electronics Gadgets' },
       { name: 'Fitness Equipment' },
       { name: 'Office Supplies' },
@@ -24,7 +23,8 @@ async function seedCategories() {
       { name: 'Healthcare Products' },
       { name: 'Automotive Accessories' },
       { name: 'Pet Supplies' },
-      { name: 'Smartphone Accessories' }
+      { name: 'Smartphone Accessories' },
+      { name: 'Fashion Apparel' }
       // Add more categories as needed
     ];
 

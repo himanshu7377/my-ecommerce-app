@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Topheader from '../components/Topheader';
@@ -8,52 +8,69 @@ import Button from '../components/Button';
 const MainContent = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchCategories();
+    loadUserCategories();
   }, []);
 
   const fetchCategories = async () => {
     try {
       const response = await axios.get('/api/category');
-      console.log(response)
-      console.log("category",response.data.categories)
       setCategories(response.data.categories);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
   };
 
+  const loadUserCategories = () => {
+    const userCategories = localStorage.getItem('userCategories');
+    if (userCategories) {
+      setSelectedCategories(JSON.parse(userCategories));
+    }
+  };
+
   const handleCheckboxChange = (categoryId) => {
     setSelectedCategories((prevSelectedCategories) => {
-      if (prevSelectedCategories.includes(categoryId)) {
-        // If category is already selected, remove it
-        return prevSelectedCategories.filter((id) => id !== categoryId);
+      const updatedCategories = [...prevSelectedCategories];
+      const index = updatedCategories.indexOf(categoryId);
+      if (index !== -1) {
+        updatedCategories.splice(index, 1);
       } else {
-        // If category is not selected, add it
-        return [...prevSelectedCategories, categoryId];
+        updatedCategories.push(categoryId);
       }
+      saveUserCategories(updatedCategories);
+      return updatedCategories;
     });
   };
 
-  const handleSave = async () => {
-    try {
-      // Send selected categories to the backend
-      await axios.post('/api/saveCategories', { categories: selectedCategories });
-      alert('Categories saved successfully!');
-    } catch (error) {
-      console.error('Error saving categories:', error);
-      alert('Failed to save categories. Please try again later.');
-    }
+  const saveUserCategories = (userCategories) => {
+    localStorage.setItem('userCategories', JSON.stringify(userCategories));
   };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * 6;
+  const endIndex = Math.min(startIndex + 6, categories.length);
+  const displayCategories = categories.slice(startIndex, endIndex);
 
   return (
     <>
       <Topheader />
       <div className='w-[576px] h-[658px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
-        {/* Display categories with checkboxes */}
-        {categories.map((category) => (
-          <div key={category.id} className="flex items-center">
+
+        <div >
+          <h1 className='text-4xl text-bold text-center'>Please mark your interests!</h1>
+          <p className='text-center m-8 text-xl '>We will keep you notified.</p>
+        </div>
+        <div>
+          <h2 className='text-2xl text'>My saved interests!</h2>
+        </div>
+        {displayCategories.map((category) => (
+          <div key={category.id} className="flex items-center m-3">
             <Checkbox
               checked={selectedCategories.includes(category.id)}
               onChange={() => handleCheckboxChange(category.id)}
@@ -61,21 +78,29 @@ const MainContent = () => {
             <label htmlFor={`category-${category.id}`} className="ml-2">{category.name}</label>
           </div>
         ))}
-
-        {/* Pagination */}
         <nav className="flex justify-center items-center gap-x-1">
-          {[1, 2, 3, 4, 5, 6].map((pageNumber) => (
+          <Button
+            type="button"
+            btnText="&lt;"
+            onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)}
+            className="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-900 py-2 px-3 text-sm rounded-lg focus:outline-none"
+          />
+          {[...Array(Math.ceil(categories.length / 6)).keys()].map((pageNumber) => (
             <Button
               key={pageNumber}
               type="button"
-              btnText={pageNumber.toString()}
-              className={`min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-900 py-2 px-3 text-sm rounded-lg focus:outline-none`}
+              btnText={pageNumber + 1}
+              onClick={() => handlePageChange(pageNumber + 1)}
+              className="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-900 py-2 px-3 text-sm rounded-lg focus:outline-none"
             />
           ))}
+          <Button
+            type="button"
+            btnText="&gt;"
+            onClick={() => handlePageChange(currentPage < Math.ceil(categories.length / 6) ? currentPage + 1 : Math.ceil(categories.length / 6))}
+            className="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-900 py-2 px-3 text-sm rounded-lg focus:outline-none"
+          />
         </nav>
-
-        {/* Save button */}
-        <Button type="button" btnText="Save" onClick={handleSave} className="w-full mt-4" />
       </div>
     </>
   );
