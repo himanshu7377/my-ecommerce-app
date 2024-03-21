@@ -14,6 +14,3 @@ else{
 
 export default prisma;
 
-// const { PrismaClient } = require('@prisma/client')
-
-// export const prisma = new PrismaClient()

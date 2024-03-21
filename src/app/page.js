@@ -1,16 +1,13 @@
 "use client"
 import React, { useState } from 'react'
 import Topheader from './components/Topheader'
-// import prisma from './lib/prisma'
+
 import Heading from './components/Heading';
 import Button from './components/Button';
 import Input from './components/Input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-// async function getUserData(){
-//   const userdetail = await prisma.User.findMany();
-//   return userdetail;
-// }
+
 const Home = () => {
   const router = useRouter();
   const [userDetail,setUserDetail] = useState({
@@ -24,8 +21,7 @@ const Home = () => {
     // console.log(updated);
     setUserDetail(updated);
   }
-  // const data = await getUserData();
-  // console.log(data);
+  
 
   const handleSubmit = async()=>{
   
@@ -45,7 +41,7 @@ const Home = () => {
       }
       
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       // return data;
     } catch (error) {
       console.error('Error registering user:', error);

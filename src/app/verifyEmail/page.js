@@ -13,7 +13,7 @@ const Page = () => {
     <>
       <Topheader/>
     <div className='w-[576px] h-[453px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
-        <Heading heading="Verify your email" className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5"/>
+        <h1  className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5">Verify your email</h1>
         <p className="font-normal text-[16px] leading-[19.36px] text-[#000000] mx-auto w-[334px] h-[42px] text-center">
         Enter the 8 digit code you have received on <b>anu***@gmail.com</b>
         </p>

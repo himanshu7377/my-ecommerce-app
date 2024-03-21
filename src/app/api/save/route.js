@@ -1,6 +1,6 @@
 / src/pages/api/saveCategories.js
 import { getSession } from 'next-auth/react'; // Assuming you're using NextAuth for user authentication
-import prisma from '@/app/lib/prisma'; // Adjust the import path according to your project structure
+import prisma from '@/app/lib/prisma'; 
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
   const userId = session.user.id; // Adjust according to how you store this in the session
+  console.log("userid",userId)
 
   const { categories } = req.body;
 

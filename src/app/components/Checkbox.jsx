@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image';
 const Checkbox = ({label}) => {
   return (
     <div class="inline-flex items-center gap-2">
@@ -7,12 +7,7 @@ const Checkbox = ({label}) => {
             <input type="checkbox" class="bg-[#C1C1C1] before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900"
             id="check" />
             <span class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
-                    stroke="currentColor" stroke-width="1">
-                    <path fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"></path>
-                </svg>
+                <Image src="/tick.svg" alt='tick' width={15} height={15}/>
             </span>
         </label>
         <label class="mt-px font-light text-[#000000] cursor-pointer select-none" htmlFor="check">

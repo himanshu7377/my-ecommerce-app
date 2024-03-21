@@ -26,11 +26,8 @@ const Topheader = () => {
                     {/* Search icon */}
                     <Image src="/search.svg" alt="Search" width={30} height={40} />
 
-
                     {/* Cart icon */}
                     <Image src="/cart.svg" alt="cart" width={30} height={40} />
-
-                    
                 </div>
       </div>
     </div>
