@@ -29,24 +29,7 @@ const Home = () => {
 
   const handleSubmit = async()=>{
   
-    // try{
-    //   await fetch('/api/register',{
-    //     method:"POST",
-    //     headers:{
-    //       "Content-Type":"application/json"
-    //     },
-    //     body:JSON.stringify(
-    //       {name:userDetail.name,
-    //         email:userDetail.email,
-    //         password:userDetail.password
-    //       })
-    //   });
-
-    // }
-    // catch(error)
-    // {
-    //   console.error();
-    // }
+   
 
     try {
       const response = await fetch('/api/register', {
@@ -69,6 +52,7 @@ const Home = () => {
       throw error;
     }
     setUserDetail({...userDetail,name:"",email:"",password:""});
+    router.push('/verifyEmail');
   }
   return (
     <>
@@ -81,7 +65,7 @@ const Home = () => {
         <Button type='button' onClick={handleSubmit} className='border rounded-md border-[#C1C1C1] px-[148px] py-[18px] bg-[#000000] w-[500px] h-14 text-white mx-auto my-8' btnText="CREATE ACCOUNT"/>
         <p className='text-sm mx-auto my-2'>Have an account? 
         <Link href={'/login'}>
-        <span className='text-[#000000] cursor-pointer'>LOGIN</span>
+        <span className='text-[#000000] cursor-pointer text-xl ml-1'> LOGIN</span>
         </Link></p>
     </form>
     </>

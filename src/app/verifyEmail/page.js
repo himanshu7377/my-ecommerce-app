@@ -1,9 +1,14 @@
+"use client"
 import React from 'react'
 import Topheader from '../components/Topheader'
 import Heading from '../components/Heading'
 import Button from '../components/Button'
-
+import { useRouter } from 'next/navigation';
 const Page = () => {
+  const router = useRouter();
+  const handleverify=()=>{
+    router.push("/login");
+  }
   return (
     <>
       <Topheader/>
@@ -26,7 +31,7 @@ const Page = () => {
 
             </div>
         </div>
-        <Button type='button' className='border rounded-md border-[#C1C1C1] px-[148px] py-[18px] bg-[#000000] w-[500px] h-14 text-white mx-auto my-8' btnText="VERIFY"/>
+        <Button type='button' className='border rounded-md border-[#C1C1C1] px-[148px] py-[18px] bg-[#000000] w-[500px] h-14 text-white mx-auto my-8' btnText="VERIFY" onClick={handleverify}/>
     </div>
     </>
   )

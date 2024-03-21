@@ -6,10 +6,10 @@ import Image from 'next/image';
 const Topheader = () => {
   return (<>
     <div className=' h-[100px] bg-[#FFFFFF]'>
-      <div className='flex gap-10 justify-end pr-12 pt-5'>
+      <div className='flex gap-6 justify-end pr-12 pt-5'>
         <div className='text-sm'>Help</div>
         <div className='text-sm'>Orders & Returns</div>
-        <div className='text-sm'>Hii, John</div>
+        <div className='text-sm'>Hi, John</div>
       </div>
       <div className='flex justify-normal items-center gap-[21%] p-4'>
         <Link href={'/'}>
@@ -22,7 +22,7 @@ const Topheader = () => {
             <div className='font-bold'>New stock</div>
             <div className='font-bold'>Trending</div>
         </div>
-        <div className='display float-end flex space-x-8  '>
+        <div className='display float-end flex space-x-6 ml-20  '>
                     {/* Search icon */}
                     <Image src="/search.svg" alt="Search" width={30} height={40} />
 
