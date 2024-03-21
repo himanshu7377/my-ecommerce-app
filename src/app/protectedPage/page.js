@@ -13,7 +13,7 @@ const MainContent = () => {
 
   useEffect(() => {
     fetchCategories();
-    loadUserCategories();
+    // loadUserCategories();
   }, []);
 
   const fetchCategories = async () => {
@@ -25,25 +25,25 @@ const MainContent = () => {
     }
   };
 
-  const loadUserCategories = async () => {
-    try {
-      const response = await axios.get('/api/user-categories');
-      setSelectedCategories(response.data.selectedCategories);
-    } catch (error) {
-      console.error('Error loading user categories:', error);
-    }
-  };
+  // const loadUserCategories = async () => {
+  //   try {
+  //     const response = await axios.get('/api/user-categories');
+  //     setSelectedCategories(response.data.selectedCategories);
+  //   } catch (error) {
+  //     console.error('Error loading user categories:', error);
+  //   }
+  // };
 
   const handleCheckboxChange = async (categoryId) => {
     const updatedCategories = selectedCategories.includes(categoryId)
       ? selectedCategories.filter((id) => id !== categoryId)
       : [...selectedCategories, categoryId];
     setSelectedCategories(updatedCategories);
-    try {
-      await axios.post('/api/update-user-categories', { categories: updatedCategories });
-    } catch (error) {
-      console.error('Error updating user categories:', error);
-    }
+    // try {
+    //   await axios.post('/api/update-user-categories', { categories: updatedCategories });
+    // } catch (error) {
+    //   console.error('Error updating user categories:', error);
+    // }
   };
 
   const handlePageChange = (page) => {
