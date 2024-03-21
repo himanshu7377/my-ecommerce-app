@@ -1,4 +1,5 @@
-"use client";
+// Client-side code
+"use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Topheader from '../components/Topheader';
@@ -24,29 +25,25 @@ const MainContent = () => {
     }
   };
 
-  const loadUserCategories = () => {
-    const userCategories = localStorage.getItem('userCategories');
-    if (userCategories) {
-      setSelectedCategories(JSON.parse(userCategories));
+  const loadUserCategories = async () => {
+    try {
+      const response = await axios.get('/api/user-categories');
+      setSelectedCategories(response.data.selectedCategories);
+    } catch (error) {
+      console.error('Error loading user categories:', error);
     }
   };
 
-  const handleCheckboxChange = (categoryId) => {
-    setSelectedCategories((prevSelectedCategories) => {
-      const updatedCategories = [...prevSelectedCategories];
-      const index = updatedCategories.indexOf(categoryId);
-      if (index !== -1) {
-        updatedCategories.splice(index, 1);
-      } else {
-        updatedCategories.push(categoryId);
-      }
-      saveUserCategories(updatedCategories);
-      return updatedCategories;
-    });
-  };
-
-  const saveUserCategories = (userCategories) => {
-    localStorage.setItem('userCategories', JSON.stringify(userCategories));
+  const handleCheckboxChange = async (categoryId) => {
+    const updatedCategories = selectedCategories.includes(categoryId)
+      ? selectedCategories.filter((id) => id !== categoryId)
+      : [...selectedCategories, categoryId];
+    setSelectedCategories(updatedCategories);
+    try {
+      await axios.post('/api/update-user-categories', { categories: updatedCategories });
+    } catch (error) {
+      console.error('Error updating user categories:', error);
+    }
   };
 
   const handlePageChange = (page) => {
@@ -61,8 +58,7 @@ const MainContent = () => {
     <>
       <Topheader />
       <div className='w-[576px] h-[658px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
-
-        <div >
+        <div>
           <h1 className='text-4xl text-bold text-center'>Please mark your interests!</h1>
           <p className='text-center m-8 text-xl '>We will keep you notified.</p>
         </div>
