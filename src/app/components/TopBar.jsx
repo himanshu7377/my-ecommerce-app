@@ -1,15 +1,32 @@
+"use client"
 import Link from 'next/link'
 import React from 'react' 
-
+import  { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+const handleLogout = () => {
+
+  localStorage.removeItem('token'); // Assuming you're using localStorage for authentication tokens
+  
+  // Redirect to the home page or login page after logout
+ 
+};
+
 const Topheader = () => {
+
+  const [user, setUser] = useState({ name: "John" }); // Initial state with a default name
+
+    
+  
   return (<>
     <div className=' h-[100px] bg-[#FFFFFF]'>
       <div className='flex gap-6 justify-end pr-12 pt-5'>
         <div className='text-sm'>Help</div>
         <div className='text-sm'>Orders & Returns</div>
-        <div className='text-sm'>Hi, John</div>
+        <div className='text-sm'>Hi, {user.name || "john"}</div>
+        <Link href={'/'} onClick={handleLogout} >
+        <div className='text-sm'>logout</div>
+        </Link> 
       </div>
       <div className='flex justify-normal items-center gap-[21%] p-4'>
         <Link href={'/'}>

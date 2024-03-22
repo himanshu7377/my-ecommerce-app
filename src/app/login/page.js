@@ -37,15 +37,17 @@ const Login = () => {
         },
         body: JSON.stringify(userDetail)
       });
-
+      const data = await response.json();
       if (response.ok) {
+        localStorage.setItem('token', data.token); // Store token in local storage
+        
         router.push('/protectedPage');
       } else {
         // Display error message if login fails
         setError("Invalid email or password.");
       }
 
-      const data = await response.json();
+      // const data = await response.json();
       console.log(data);
     } catch (error) {
       console.error('Error signing in:', error);
