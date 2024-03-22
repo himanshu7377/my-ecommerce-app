@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Topheader from './components/Topheader'
 
-import Heading from './components/Heading';
+
 import Button from './components/Button';
 import Input from './components/Input';
 import Link from 'next/link';
@@ -18,7 +18,6 @@ const Home = () => {
   const inputChange = (e)=>{
     let updated = {...userDetail};
     updated[e.target.name] = e.target.value;
-    // console.log(updated);
     setUserDetail(updated);
   }
   
@@ -41,8 +40,7 @@ const Home = () => {
       }
       
       const data = await response.json();
-      // console.log(data);
-      // return data;
+      
     } catch (error) {
       console.error('Error registering user:', error);
       throw error;
@@ -54,7 +52,7 @@ const Home = () => {
     <>
       <Topheader/>
       <form className='w-[576px] h-[691px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
-        <Heading heading="Create your account" className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5"/>
+        <h1 className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5">Create your account</h1>
         <Input name="name" onChangeHandler={inputChange} className='border rounded-md border-[#C1C1C1] p-[10px]' type="text" placeholder="Enter" labelText="Name"/>
         <Input name="email" onChangeHandler={inputChange} className='border rounded-md border-[#C1C1C1] p-[10px]' type="email" placeholder="Enter" labelText="Email"/>
         <Input name="password" onChangeHandler={inputChange} className='border rounded-md border-[#C1C1C1] p-[10px]' type="password" placeholder="Enter" labelText="Password"/>

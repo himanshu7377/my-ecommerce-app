@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import Heading from '../components/Heading'
+
 import Input from '../components/Input'
 import Button from '../components/Button'
 import Topheader from '../components/Topheader'
@@ -18,7 +18,7 @@ const Login = () => {
   const inputChange = (e)=>{
     let updated = {...userDetail};
     updated[e.target.name] = e.target.value;
-    console.log(updated);
+    
     setUserDetail(updated);
   }
 
@@ -55,9 +55,9 @@ const Login = () => {
     <>
       <Topheader />
       <form className='w-[576px] h-[614px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
-        <Heading heading="Login" className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5"/>
-        <Heading heading="Welcome back to ECOMMERCE" className="font-medium text-[24px] leading-[29.05px] text-[#000000] mx-auto mt-5"/>
-        <Heading heading="The next gen business marketplace" className="font-normal text-[16px] leading-[19.36px] text-[#000000] mx-auto"/>
+        <h1  className="font-semibold text-[32px] leading-[38.73px] text-[#000000] mx-auto mt-5">Login</h1>
+        <h1  className="font-medium text-[24px] leading-[29.05px] text-[#000000] mx-auto mt-5">Welcome back to ECOMMERCE</h1>
+        <h1  className="font-normal text-[16px] leading-[19.36px] text-[#000000] mx-auto">The next gen business marketplace</h1>
         <Input name="email" onChangeHandler={inputChange} className='border rounded-md border-[#C1C1C1] p-[10px]' type="email" placeholder="Enter" labelText="Email"/>
         <Input name="password" onChangeHandler={inputChange} className='border rounded-md border-[#C1C1C1] p-[10px] relative' type={userDetail.showPassword ? "text" : "password"} placeholder="Enter" labelText="Password"/>
         <button
