@@ -2,7 +2,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Topheader from '../components/Topheader';
+import TopBar from '../components/TopBar';
 import Checkbox from '../components/Checkbox';
 import Button from '../components/Button';
 
@@ -56,7 +56,7 @@ const MainContent = () => {
 
   return (
     <>
-      <Topheader />
+      <TopBar />
       <div className='w-[576px] h-[658px] border border-[#C1C1C1] border-solid rounded-[20px] mx-auto my-8 flex flex-col gap-4 p-5'>
         <div>
           <h1 className='text-4xl text-bold text-center'>Please mark your interests!</h1>
