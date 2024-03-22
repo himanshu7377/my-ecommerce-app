@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react' 
 import  { useState, useEffect } from 'react';
 import Image from 'next/image';
-
+import jwt from 'jsonwebtoken';
 const handleLogout = () => {
 
   localStorage.removeItem('token'); // Assuming you're using localStorage for authentication tokens
@@ -14,16 +14,28 @@ const handleLogout = () => {
 
 const Topheader = () => {
 
-  const [user, setUser] = useState({ name: "John" }); // Initial state with a default name
+  const [user, setUser] = useState(); // Initial state with a default name
 
-    
-  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Decode the JWT token to extract user information
+      const decodedToken = jwt.decode(token);
+      if (decodedToken) {
+        // Extract the user name from the decoded token
+        const { name } = decodedToken;
+        console.log(name)
+        // Set the user name in the state
+        setUser(name);
+      }
+    }
+  }, []);
   return (<>
     <div className=' h-[100px] bg-[#FFFFFF]'>
       <div className='flex gap-6 justify-end pr-12 pt-5'>
         <div className='text-sm'>Help</div>
         <div className='text-sm'>Orders & Returns</div>
-        <div className='text-sm'>Hi, {user.name || "john"}</div>
+        <div className='text-sm'>Hi, {user || "john"}</div>
         <Link href={'/'} onClick={handleLogout} >
         <div className='text-sm'>logout</div>
         </Link> 
