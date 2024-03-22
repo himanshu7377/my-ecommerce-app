@@ -72,7 +72,7 @@ const Login = () => {
         <Button type='button' onClick={handleLogin} className='border rounded-md border-[#C1C1C1] px-[148px] py-[18px] bg-[#000000] w-[500px] h-14 text-white mx-auto my-8' btnText="LOGIN"/>
         <div className='border border-b-slate-300 ml-5 mr-5'/>
         <p className='text-sm mx-auto my-2'>Don't have an Account? 
-          <Link href={'/'}>
+          <Link href={"/"}>
             <span className='text-xl cursor-pointer ml-2'>SIGN UP</span>
           </Link>
         </p>
